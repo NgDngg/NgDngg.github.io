@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nguyễn Tùng Dương - Portfolio</title>
     
-    <!-- Sử dụng Tailwind CSS qua CDN để tạo giao diện hiện đại nhanh chóng -->
+    <!-- Sử dụng Tailwind CSS qua CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font Awesome để dùng các icon (Trường học, Mạng, Facebook) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Cấu hình màu sắc tùy chỉnh cho Tailwind -->
@@ -17,10 +17,11 @@
             theme: {
                 extend: {
                     colors: {
-                        darkBg: '#0f172a', // Nền xanh đen tối
+                        darkBg: '#0f172a',
                     },
                     animation: {
                         'blob': 'blob 7s infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
                     },
                     keyframes: {
                         blob: {
@@ -28,6 +29,10 @@
                             '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
                             '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
                             '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
                         }
                     }
                 }
@@ -36,7 +41,6 @@
     </script>
 
     <style>
-        /* CSS tùy chỉnh thêm cho hiệu ứng mượt mà */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
         
         body {
@@ -48,235 +52,185 @@
 
         /* Hiệu ứng kính mờ (Glassmorphism) */
         .glass-card {
-            background: rgba(30, 41, 59, 0.4); /* Slate 800 với độ trong suốt */
+            background: rgba(30, 41, 59, 0.4);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        /* Độ trễ cho animation của background */
-        .animation-delay-2000 {
-            animation-delay: 2s;
-        }
-        .animation-delay-4000 {
-            animation-delay: 4s;
-        }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+        
+        /* Tùy chỉnh thanh cuộn cho đẹp mắt trên máy tính */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4 md:p-8 relative">
 
     <!-- Hiệu ứng Gradient Background chuyển động -->
     <div class="fixed inset-0 w-full h-full z-0 overflow-hidden flex items-center justify-center pointer-events-none">
-        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-600 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-blob"></div>
-        <div class="absolute top-1/3 right-1/4 w-72 h-72 bg-purple-600 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-blob animation-delay-2000"></div>
-        <div class="absolute bottom-1/4 left-1/2 w-72 h-72 bg-cyan-500 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-blob animation-delay-4000"></div>
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob"></div>
+        <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-1/4 left-1/2 w-96 h-96 bg-cyan-500 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob animation-delay-4000"></div>
     </div>
 
-    <!-- Nội dung chính -->
-    <main class="z-10 w-full max-w-3xl glass-card rounded-3xl p-8 md:p-12 transform transition-all duration-500 hover:shadow-cyan-500/10 hover:border-cyan-500/20">
+    <!-- Nội dung chính (Thay đổi max-w rộng hơn cho Desktop và dùng Grid layout) -->
+    <main class="z-10 w-full max-w-5xl glass-card rounded-3xl p-8 md:p-10 transform transition-all duration-500 hover:shadow-cyan-500/10 hover:border-cyan-500/20">
         
-        <div class="flex flex-col md:flex-row gap-8 items-center md:items-start">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
             
-            <!-- Phần Avatar -->
-            <div class="flex-shrink-0 relative group">
-                <div class="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-full blur opacity-70 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-                <img src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-6/659673772_951364870973462_3744252160377949961_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=VHTgCCYtv20Q7kNvwGexzOp&_nc_oc=AdoBnLUgfA7ijUpCFRlyCfSeUfkWdpSxPlhuvwFtxOkxK_sRBpkRHYwoPAc_4zy8ut8&_nc_zt=23&_nc_ht=scontent.fsgn19-1.fna&_nc_gid=sC8hPJmOUExa3njJbWxwzA&_nc_ss=7a3a8&oh=00_Af2xO1hHmbQgSJOM-cyB_EW_Hxsr5owjQ0yUXeQDiibAyg&oe=69D6E21A&background=0D8ABC&color=fff&size=150" 
-                     alt="Avatar Nguyễn Tùng Dương" 
-                     class="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-slate-800">
-            </div>
+            <!-- CỘT TRÁI: Profile cố định (Chiếm 4/12 màn hình trên máy tính) -->
+            <div class="md:col-span-4 flex flex-col items-center md:items-start border-b md:border-b-0 md:border-r border-slate-700/50 pb-8 md:pb-0 md:pr-8 text-center md:text-left">
+                
+                <!-- Avatar -->
+                <div class="relative group mb-6">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-full blur opacity-70 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                    <img src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-6/659673772_951364870973462_3744252160377949961_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=VHTgCCYtv20Q7kNvwGexzOp&_nc_oc=AdoBnLUgfA7ijUpCFRlyCfSeUfkWdpSxPlhuvwFtxOkxK_sRBpkRHYwoPAc_4zy8ut8&_nc_zt=23&_nc_ht=scontent.fsgn19-1.fna&_nc_gid=sC8hPJmOUExa3njJbWxwzA&_nc_ss=7a3a8&oh=00_Af2xO1hHmbQgSJOM-cyB_EW_Hxsr5owjQ0yUXeQDiibAyg&oe=69D6E21A&background=0D8ABC&color=fff&size=150" 
+                         alt="Avatar" 
+                         class="relative w-40 h-40 rounded-full object-cover border-4 border-slate-900 mx-auto md:mx-0">
+                </div>
 
-            <!-- Phần Thông tin -->
-            <div class="text-center md:text-left flex-1">
-                <div class="inline-block px-3 py-1 mb-4 rounded-full bg-slate-800/80 border border-slate-700 text-cyan-400 text-sm font-semibold tracking-wide uppercase">
+                <!-- Tên & Chức danh -->
+                <div class="inline-block px-3 py-1 mb-3 rounded-full bg-slate-800/80 border border-slate-700 text-cyan-400 text-xs font-semibold tracking-wide uppercase">
                     Sinh viên năm nhất
                 </div>
                 
-                <h1 class="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight">
+                <h1 class="text-3xl font-extrabold mb-2 tracking-tight">
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
                         Nguyễn Tùng Dương
                     </span>
                 </h1>
                 
-                <!-- Mô tả ngắn gọn -->
-                <p class="text-slate-400 mt-4 leading-relaxed text-lg">
-                    Xin chào! Tôi hiện đang là sinh viên năm nhất với niềm đam mê khám phá thế giới kết nối internet và hệ thống mạng. Tôi đang trong quá trình xây dựng nền tảng vững chắc để phát triển trong lĩnh vực này.
-                </p>
-
-                <!-- Box Chuyên ngành & Trường -->
-                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-slate-800/50 p-4 rounded-2xl border border-slate-700/50 flex items-center gap-4 transition hover:bg-slate-800">
-                        <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0">
-                            <i class="fa-solid fa-school text-blue-400 text-lg"></i>
-                        </div>
-                        <div class="text-left">
-                            <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Đại học</p>
-                            <p class="text-slate-200 font-medium text-sm">Công nghệ Thông tin (UIT)</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-800/50 p-4 rounded-2xl border border-slate-700/50 flex items-center gap-4 transition hover:bg-slate-800">
-                        <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
-                            <i class="fa-solid fa-network-wired text-purple-400 text-lg"></i>
-                        </div>
-                        <div class="text-left">
-                            <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Chuyên ngành</p>
-                            <p class="text-slate-200 font-medium text-sm">Mạng máy tính & TT Dữ liệu</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mục tiêu (Thay thế cho phần Kỹ năng/Dự án) -->
-                <div class="mt-8 p-5 bg-gradient-to-br from-slate-800/50 to-transparent rounded-2xl border-l-4 border-cyan-500">
-                    <h3 class="text-slate-200 font-semibold mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-rocket text-cyan-400"></i> Mục tiêu hiện tại
-                    </h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Tập trung nắm vững kiến thức nền tảng tại giảng đường, tìm hiểu các chứng chỉ mạng cơ bản (như CCNA) và rèn luyện kỹ năng lập trình. Rất mong được kết nối và học hỏi từ các anh chị đi trước!
-                    </p>
-                </div>
-
                 <!-- Nút liên hệ -->
-                <div class="mt-8 flex flex-wrap gap-4 justify-center md:justify-start">
+                <div class="mt-6 w-full">
                     <a href="https://www.facebook.com/duong.nguyen.225518" target="_blank" rel="noopener noreferrer" 
-                       class="group relative inline-flex items-center gap-2 px-8 py-3 bg-[#1877F2] hover:bg-[#166FE5] text-white rounded-full font-semibold transition-all duration-300 shadow-[0_0_20px_rgba(24,119,242,0.3)] hover:shadow-[0_0_25px_rgba(24,119,242,0.5)] hover:-translate-y-1">
+                       class="group w-full md:w-auto inline-flex justify-center items-center gap-2 px-6 py-3 bg-[#1877F2] hover:bg-[#166FE5] text-white rounded-xl font-semibold transition-all duration-300 shadow-[0_0_15px_rgba(24,119,242,0.3)] hover:-translate-y-1">
                         <i class="fa-brands fa-facebook-f text-lg"></i>
                         Kết nối Facebook
                     </a>
                 </div>
-
             </div>
-        </div>
 
-        <!-- Phần AI Chat tích hợp Gemini API -->
-        <div class="mt-12 pt-8 border-t border-slate-700/50">
-            <h3 class="text-xl font-bold text-slate-200 mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-robot text-cyan-400"></i> Trợ lý AI của Dương ✨
-            </h3>
-            <p class="text-slate-400 text-sm mb-4">Bạn có câu hỏi gì về ngành Mạng máy tính hoặc về tôi không? Hãy hỏi trợ lý AI nhé!</p>
-            
-            <div class="flex flex-col gap-3">
-                <div id="chat-history" class="bg-slate-900/50 rounded-xl p-4 min-h-[150px] max-h-[250px] overflow-y-auto flex flex-col gap-3 border border-slate-700/50 text-sm custom-scrollbar">
-                    <div class="text-slate-300 bg-slate-800/80 p-3 rounded-lg rounded-tl-none self-start max-w-[85%] border border-slate-700 shadow-sm shadow-cyan-900/20">
-                        Xin chào! 👋 Mình là trợ lý AI trên trang web của Tùng Dương. Mình có thể giúp gì cho bạn?
-                    </div>
-                </div>
+            <!-- CỘT PHẢI: Nội dung thay đổi (Chiếm 8/12 màn hình) -->
+            <div class="md:col-span-8 flex flex-col h-full">
                 
-                <form id="ai-chat-form" class="flex gap-2">
-                    <input type="text" id="ai-input" required placeholder="Hỏi AI về Dương hoặc ngành Mạng..." 
-                           class="flex-1 bg-slate-800/80 border border-slate-600 rounded-full px-5 py-2 text-slate-200 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition shadow-inner">
-                    <button type="submit" id="ai-submit-btn" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-6 py-2 rounded-full font-semibold transition shadow-lg shadow-cyan-500/30 flex items-center justify-center min-w-[100px]">
-                        Gửi ✨
+                <!-- Thanh Menu Tab (Các mục nhấn) -->
+                <div class="flex flex-wrap gap-2 mb-8 bg-slate-800/50 p-1.5 rounded-2xl border border-slate-700/50 inline-flex">
+                    <button onclick="switchTab('about')" id="btn-about" class="tab-btn active px-6 py-2 rounded-xl text-sm font-semibold transition-all duration-300 bg-cyan-500 text-white shadow-lg shadow-cyan-500/25">
+                        <i class="fa-regular fa-user mr-2"></i>Giới thiệu
                     </button>
-                </form>
+                    <button onclick="switchTab('education')" id="btn-education" class="tab-btn px-6 py-2 rounded-xl text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-700 transition-all duration-300">
+                        <i class="fa-solid fa-graduation-cap mr-2"></i>Học vấn
+                    </button>
+                    <button onclick="switchTab('goals')" id="btn-goals" class="tab-btn px-6 py-2 rounded-xl text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-700 transition-all duration-300">
+                        <i class="fa-solid fa-rocket mr-2"></i>Mục tiêu
+                    </button>
+                </div>
+
+                <!-- NỘI DUNG TỪNG TAB -->
+                <div class="flex-1 relative min-h-[250px]">
+                    
+                    <!-- Tab 1: Giới thiệu -->
+                    <div id="tab-about" class="tab-content animate-fade-in block">
+                        <h2 class="text-2xl font-bold text-slate-200 mb-4 border-l-4 border-cyan-500 pl-4">Về bản thân tôi</h2>
+                        <p class="text-slate-400 leading-relaxed text-lg mb-4">
+                            Xin chào! Tôi hiện đang là sinh viên năm nhất với niềm đam mê khám phá thế giới kết nối internet và hệ thống mạng. Tôi luôn tò mò về cách các máy tính giao tiếp với nhau trên toàn cầu.
+                        </p>
+                        <p class="text-slate-400 leading-relaxed text-lg">
+                            Tôi đang trong quá trình xây dựng nền tảng vững chắc để phát triển trong lĩnh vực Công nghệ thông tin. Rất vui được làm quen với mọi người!
+                        </p>
+                    </div>
+
+                    <!-- Tab 2: Học vấn (Mặc định ẩn) -->
+                    <div id="tab-education" class="tab-content animate-fade-in hidden">
+                        <h2 class="text-2xl font-bold text-slate-200 mb-4 border-l-4 border-blue-500 pl-4">Thông tin Học vấn</h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                            <!-- Box Trường -->
+                            <div class="bg-slate-800/40 p-5 rounded-2xl border border-slate-700/50 hover:border-blue-500/50 transition duration-300 group">
+                                <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-school text-blue-400 text-xl"></i>
+                                </div>
+                                <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Đại học</p>
+                                <p class="text-slate-200 font-medium text-lg">Công nghệ Thông tin (UIT)</p>
+                                <p class="text-slate-500 text-sm mt-2">Đại học Quốc gia TP.HCM</p>
+                            </div>
+
+                            <!-- Box Chuyên ngành -->
+                            <div class="bg-slate-800/40 p-5 rounded-2xl border border-slate-700/50 hover:border-purple-500/50 transition duration-300 group">
+                                <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-network-wired text-purple-400 text-xl"></i>
+                                </div>
+                                <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Chuyên ngành</p>
+                                <p class="text-slate-200 font-medium text-lg">Mạng máy tính & TT Dữ liệu</p>
+                                <p class="text-slate-500 text-sm mt-2">Sinh viên năm nhất</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 3: Mục tiêu (Mặc định ẩn) -->
+                    <div id="tab-goals" class="tab-content animate-fade-in hidden">
+                        <h2 class="text-2xl font-bold text-slate-200 mb-4 border-l-4 border-purple-500 pl-4">Định hướng tương lai</h2>
+                        
+                        <div class="mt-4 p-6 bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 relative overflow-hidden">
+                            <!-- Icon trang trí mờ ở background -->
+                            <i class="fa-solid fa-bullseye absolute -right-4 -top-4 text-8xl text-slate-700/20"></i>
+                            
+                            <ul class="space-y-4 text-slate-400 relative z-10 text-lg">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check-circle text-cyan-500 mt-1"></i>
+                                    <span>Tập trung nắm vững kiến thức nền tảng tại giảng đường đại học.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check-circle text-cyan-500 mt-1"></i>
+                                    <span>Tìm hiểu và thi lấy các chứng chỉ mạng cơ bản quốc tế (như CCNA).</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check-circle text-cyan-500 mt-1"></i>
+                                    <span>Rèn luyện thêm tư duy logic và kỹ năng lập trình bổ trợ.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check-circle text-cyan-500 mt-1"></i>
+                                    <span>Mở rộng mối quan hệ, kết nối và học hỏi từ các anh chị đi trước.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- Script xử lý Gemini API -->
+    <!-- Script xử lý việc chuyển đổi qua lại giữa các Tab -->
     <script>
-        // Môi trường thực thi sẽ tự động cung cấp API key vào biến này
-        const apiKey = ""; 
-        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+        function switchTab(tabId) {
+            // 1. Ẩn tất cả các nội dung tab
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.add('hidden');
+                content.classList.remove('block');
+            });
 
-        const chatHistory = document.getElementById('chat-history');
-        const chatForm = document.getElementById('ai-chat-form');
-        const chatInput = document.getElementById('ai-input');
-        const submitBtn = document.getElementById('ai-submit-btn');
+            // 2. Reset style của tất cả các nút (đổi về màu xám)
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.className = 'tab-btn px-6 py-2 rounded-xl text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-700 transition-all duration-300';
+            });
 
-        // Cơ chế Retry (Exponential Backoff) để xử lý lỗi mạng/API
-        async function fetchWithRetry(url, options, retries = 5) {
-            let delay = 1000;
-            for (let i = 0; i < retries; i++) {
-                try {
-                    const response = await fetch(url, options);
-                    if (!response.ok) throw new Error(`Lỗi HTTP: ${response.status}`);
-                    return await response.json();
-                } catch (e) {
-                    if (i === retries - 1) throw e;
-                    await new Promise(res => setTimeout(res, delay));
-                    delay *= 2;
-                }
-            }
+            // 3. Hiển thị nội dung tab được chọn
+            const targetContent = document.getElementById('tab-' + tabId);
+            targetContent.classList.remove('hidden');
+            targetContent.classList.add('block');
+
+            // 4. Highlight nút đang được chọn (đổi sang màu xanh nổi bật)
+            const targetButton = document.getElementById('btn-' + tabId);
+            targetButton.className = 'tab-btn active px-6 py-2 rounded-xl text-sm font-semibold transition-all duration-300 bg-cyan-500 text-white shadow-lg shadow-cyan-500/25';
         }
-
-        // Hàm hiển thị tin nhắn lên giao diện
-        function appendMessage(text, isUser = false) {
-            const msgDiv = document.createElement('div');
-            msgDiv.className = `p-3 rounded-lg max-w-[85%] border border-slate-700 text-sm shadow-sm ${
-                isUser 
-                ? 'bg-cyan-600/20 text-cyan-50 rounded-tr-none self-end border-cyan-500/30 shadow-cyan-900/20' 
-                : 'bg-slate-800/80 text-slate-300 rounded-tl-none self-start shadow-slate-900/50'
-            }`;
-            
-            // Format xuống dòng cơ bản
-            msgDiv.innerHTML = text.replace(/\n/g, '<br>');
-            chatHistory.appendChild(msgDiv);
-            chatHistory.scrollTop = chatHistory.scrollHeight;
-        }
-
-        // Cập nhật trạng thái "Đang suy nghĩ"
-        function setTyping(isTyping) {
-            if (isTyping) {
-                const typingDiv = document.createElement('div');
-                typingDiv.id = 'typing-indicator';
-                typingDiv.className = 'bg-slate-800/80 text-slate-400 p-3 rounded-lg rounded-tl-none self-start max-w-[85%] border border-slate-700 text-sm italic flex items-center gap-2';
-                typingDiv.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin text-cyan-500"></i> Đang suy nghĩ...';
-                chatHistory.appendChild(typingDiv);
-                chatHistory.scrollTop = chatHistory.scrollHeight;
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fa-solid fa-ellipsis"></i>';
-                chatInput.disabled = true;
-            } else {
-                const typingDiv = document.getElementById('typing-indicator');
-                if (typingDiv) typingDiv.remove();
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = 'Gửi ✨';
-                chatInput.disabled = false;
-                chatInput.focus();
-            }
-        }
-
-        // Bắt sự kiện khi người dùng gửi câu hỏi
-        chatForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const question = chatInput.value.trim();
-            if (!question) return;
-
-            appendMessage(question, true);
-            chatInput.value = '';
-            setTyping(true);
-
-            try {
-                // Cấu hình Prompt hệ thống để định hướng tính cách cho AI
-                const payload = {
-                    contents: [{ parts: [{ text: question }] }],
-                    systemInstruction: { 
-                        parts: [{ 
-                            text: "Bạn là một trợ lý AI thông minh, nhiệt tình được gắn trên trang web Portfolio của Nguyễn Tùng Dương. Dương là sinh viên năm nhất (K23 hoặc K24) ngành Mạng máy tính và Truyền thông dữ liệu tại Đại học Công nghệ Thông tin (UIT - ĐHQG TP.HCM). Hãy trả lời ngắn gọn (không quá 4 câu), vui vẻ, sử dụng emoji, và đóng vai trò là cầu nối giúp mọi người hiểu thêm về Dương cũng như kiến thức cơ bản về IT/Mạng máy tính." 
-                        }] 
-                    }
-                };
-
-                const result = await fetchWithRetry(endpoint, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                // Trích xuất văn bản phản hồi từ cấu trúc JSON của Gemini
-                const answer = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                if (answer) {
-                    appendMessage(answer, false);
-                } else {
-                    appendMessage("Xin lỗi, tôi không thể tạo được câu trả lời lúc này. Bạn vui lòng thử lại sau nhé!", false);
-                }
-            } catch (error) {
-                appendMessage("Oops, kết nối đến não bộ AI đang bị gián đoạn. Vui lòng thử lại sau!", false);
-            } finally {
-                setTyping(false);
-            }
-        });
     </script>
 </body>
 </html>
